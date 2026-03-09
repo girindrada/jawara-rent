@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreOfficeSpaceBenefitRequest;
+use App\Http\Requests\UpdateOfficeSpaceBenefitRequest;
+use App\Models\OfficeSpaceBenefit;
+
+class OfficeSpaceBenefitController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreOfficeSpaceBenefitRequest $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(OfficeSpaceBenefit $officeSpaceBenefit)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(OfficeSpaceBenefit $officeSpaceBenefit)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateOfficeSpaceBenefitRequest $request, OfficeSpaceBenefit $officeSpaceBenefit)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(OfficeSpaceBenefit $officeSpaceBenefit)
+    {
+        //
+    }
+}
