@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\ApiKeyController;
+use App\Http\Controllers\BookingTransactionController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\OfficeSpaceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,6 +20,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // admin routes
+    Route::prefix('admin')->name('admin.')->group(function(){
+        Route::resource('cities', CityController::class);
+        Route::resource('office-spaces', OfficeSpaceController::class);
+        Route::resource('booking-transactions', BookingTransactionController::class);
+        Route::resource('api-keys', ApiKeyController::class);
+        
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    });
 });
 
 require __DIR__.'/auth.php';

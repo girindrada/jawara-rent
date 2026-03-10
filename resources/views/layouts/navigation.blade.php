@@ -16,25 +16,25 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if(Auth::user()->status === 'admin')
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('users')">
+                    @if (Auth::user()->status === 'admin')
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('users')">
                             {{ __('Users') }}
                         </x-nav-link>
                     @endif
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('cities')">
+                    <x-nav-link :href="route('admin.cities.index')" :active="request()->routeIs('cities')">
                         {{ __('City') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('office-spaces')">
+                    <x-nav-link :href="route('admin.office-spaces.index')" :active="request()->routeIs('office-spaces')">
                         {{ __('Office Space') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('api-keys')">
+                    <x-nav-link :href="route('admin.api-keys.index')" :active="request()->routeIs('api-keys')">
                         {{ __('API Keys') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('booking-transactions')">
+                    <x-nav-link :href="route('admin.booking-transactions.index')" :active="request()->routeIs('booking-transactions')">
                         {{ __('Booking Transaction') }}
                     </x-nav-link>
                 </div>
@@ -99,6 +99,29 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+
+
+            @if (Auth::user()->status === 'admin')
+                <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('users')">
+                    {{ __('Users') }}
+                </x-responsive-nav-link>
+            @endif
+
+            <x-responsive-nav-link :href="route('admin.cities.index')" :active="request()->routeIs('cities')">
+                {{ __('City') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('admin.office-spaces.index')" :active="request()->routeIs('office-spaces')">
+                {{ __('Office Space') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('admin.api-keys.index')" :active="request()->routeIs('api-keys')">
+                {{ __('API Keys') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('admin.booking-transactions.index')" :active="request()->routeIs('booking-transactions')">
+                {{ __('Booking Transaction') }}
             </x-responsive-nav-link>
         </div>
 
