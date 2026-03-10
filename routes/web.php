@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('api-keys', ApiKeyController::class);
         
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
         Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     });
 });
