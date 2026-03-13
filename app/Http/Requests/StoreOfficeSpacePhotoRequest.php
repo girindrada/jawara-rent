@@ -11,7 +11,7 @@ class StoreOfficeSpacePhotoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreOfficeSpacePhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'office_space_id' => ['required', 'exists:office_spaces,id'],
+            'photo' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
         ];
     }
 }

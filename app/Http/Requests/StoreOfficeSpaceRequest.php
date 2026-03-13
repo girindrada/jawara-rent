@@ -11,7 +11,7 @@ class StoreOfficeSpaceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class StoreOfficeSpaceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required','string', 'max:255'],
+            'thumbnail' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
+            'about' => ['required', 'string'],
+            'city_id' => ['required', 'exists:cities,id'],
+            'is_open' => ['required', 'boolean'],
+            'is_full_booked' => ['required', 'boolean'],
+            'price' => ['required', 'numeric'],
+            'duration' => ['required', 'string'],
+            'address' => ['required', 'string'],
         ];
     }
 }
