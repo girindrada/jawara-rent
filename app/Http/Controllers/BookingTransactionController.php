@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBookingTransactionRequest;
 use App\Http\Requests\UpdateBookingTransactionRequest;
 use App\Models\BookingTransaction;
+use App\Models\OfficeSpace;
+use Illuminate\Support\Facades\DB;
 
 class BookingTransactionController extends Controller
 {
@@ -13,7 +15,9 @@ class BookingTransactionController extends Controller
      */
     public function index()
     {
-        //
+        $bookingTransactions = BookingTransaction::latest()->paginate(10);
+
+        return view('admin.booking-transaction.index', compact('bookingTransactions'));
     }
 
     /**
@@ -21,7 +25,9 @@ class BookingTransactionController extends Controller
      */
     public function create()
     {
-        //
+        $officeSpaces = OfficeSpace::latest()->get();
+
+        return view('admin.booking-transaction.create', compact('officeSpaces'));
     }
 
     /**
@@ -29,7 +35,13 @@ class BookingTransactionController extends Controller
      */
     public function store(StoreBookingTransactionRequest $request)
     {
-        //
+        DB::transaction(function() use ($request){
+            $validated = $request->validated();
+
+            $bookingTransaction = BookingTransaction::create($validated);
+        });
+
+        return redirect()->route('admin.booking-transactions.index')->with('success', 'new booking added succsessfully');
     }
 
     /**
@@ -45,7 +57,9 @@ class BookingTransactionController extends Controller
      */
     public function edit(BookingTransaction $bookingTransaction)
     {
-        //
+        $officeSpaces = OfficeSpace::latest()->get();
+
+        return view('admin.booking-transaction.edit', compact('officeSpaces', 'bookingTransaction'));
     }
 
     /**
@@ -53,14 +67,24 @@ class BookingTransactionController extends Controller
      */
     public function update(UpdateBookingTransactionRequest $request, BookingTransaction $bookingTransaction)
     {
-        //
-    }
+        DB::transaction(function() use ($request, $bookingTransaction){
+            $validated = $request->validated();
+
+            $bookingTransaction->update($validated);                
+        });
+
+        return redirect()->route('admin.booking-transactions.index')->with('success', 'booking transaction updated succsessfully');
+        }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(BookingTransaction $bookingTransaction)
     {
-        //
+        DB::transaction(function() use ($bookingTransaction){
+            $bookingTransaction->delete();
+        });
+
+        return redirect()->route('admin.booking-transactions.index')->with('success', 'delete trannsactions succseffully');
     }
 }

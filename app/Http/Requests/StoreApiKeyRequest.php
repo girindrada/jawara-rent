@@ -23,7 +23,7 @@ class StoreApiKeyRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'key' => ['required', 'string'],
+            'key' => ['required', 'string', 'unique:api_keys,key'],
         ];
     }
 }
